@@ -1,0 +1,30 @@
+body {
+  font-family: "Purisa", cursive;
+  background-color: #ffdef8;
+  color: #ff85a2;
+}
+h1 {
+  text-align: center;
+  margin-top: 80px;
+  text-shadow: 2px 2px #c0719c;
+}
+img {
+  display: block;
+  margin: 40px auto;
+  border-radius: 50%;
+}
+a {
+  display: block;
+  width: 150px;
+  height: 45px;
+  margin: 20px auto;
+  background-color: #ff85a2;
+  color: #fff;
+  text-align: center;
+  line-height: 45px;
+  border-radius: 15px;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #ff579f;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "cutesy-cat-of-the-day",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -w src -x node src/main.js",
+    "start": "NODE_ENV=production node src/main.js"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "multer": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>bingus game</title>
+  </head>
+  <body>
+    <button id="bingusButton">Press for Bingus Jump! ✨👉👈✨</button>
+    <div>Hope you're ready for a jump! 🐾</div>
+    <div id="bingusJump" style="height: 100px; width: 100px">🐈</div>
+  </body>
+
+  <script>
+    document
+      .getElementById("bingusButton")
+      .addEventListener("click", function () {
+        var bingus = document.getElementById("bingusJump");
+        bingus.style.position = "relative";
+        bingus.style.top = "0px";
+        var bingusJump = setInterval(function () {
+          var bingusTop = parseInt(bingus.style.top);
+          if (bingusTop <= -100) {
+            bingus.style.top = "100px";
+            clearInterval(bingusJump);
+          } else {
+            bingus.style.top = bingusTop - 10 + "px";
+          }
+        }, 50);
+      });
+  </script>
+</html>
