@@ -1,10 +1,12 @@
 import multer from "multer";
 import express from "express";
 import fs from "fs";
+import { promises as fsp } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import sharp from "sharp"; // Adding sharp to our toolbox, UwU to that! 💖🎉🔧
+import cron from "node-cron";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -76,4 +78,46 @@ app.get("/submit", (req, res) => {
     title: "Submit Your Kitty",
     message: "Let's show off your adowable kitty to the world!",
   });
+});
+
+let catOfTheDay = "";
+
+async function chooseCatOfTheDay() {
+  try {
+    let files = await fsp.readdir("uploads/");
+    const statsPromises = files.map(async (file) => {
+      const filePath = path.join("uploads/", file);
+      const stat = await fsp.stat(filePath);
+      return {
+        filePath,
+        isFile: stat.isFile(),
+        isPlaceholder: file.startsWith("_placeholder"),
+        isResized: file.startsWith("resized_"),
+      };
+    });
+    const stats = await Promise.all(statsPromises);
+    const validFiles = stats.filter(
+      (stat) => stat.isFile && !stat.isPlaceholder && !stat.isResized,
+    );
+    if (!validFiles.length) {
+      return null; // No valid files in the directory, exit the function UwU 👉👈💖
+    }
+    const randomFile =
+      validFiles[Math.floor(Math.random() * validFiles.length)].filePath;
+    catOfTheDay = randomFile;
+  } catch (err) {
+    console.log(
+      `Oopsie, an error happened in choosing the cat of the day: ${err}`,
+    );
+  }
+}
+
+chooseCatOfTheDay();
+cron.schedule("0 0 * * *", chooseCatOfTheDay);
+app.get("/catoftheday", (req, res) => {
+  if (catOfTheDay) {
+    res.sendFile(path.join(__dirname, "uploads", catOfTheDay));
+  } else {
+    res.send("No Cat of the Day currently, check back in a bit UwU 👉👈💖");
+  }
 });
