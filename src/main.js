@@ -32,23 +32,25 @@ const upload = multer({
     );
   },
 }).single("kitty");
+
 app.post("/submit", async function (req, res, next) {
   try {
-    // now we're gonna make those pics purrfect! UwU 💖🐾💫🖼️
+    // we're making sure the long side 📏 of the pic is all nice and small, how cozy! UwU 👉👈💖
     await sharp(req.file.path)
-      .resize(300, 300) // that's 300x300, but you can play with it! 😹💫👌
+      .resize({
+        width: 1200,
+        height: 1200,
+        fit: sharp.fit.inside,
+        withoutEnlargement: true,
+      }) // the "fit: sharp.fit.inside" makes sure the image gets all cozy and wrapped up but not stretched out 🎀👌
+      // "withoutEnlargement: true" is like a soft little kitty pawb saying "no no 🐾" to making smaller images big. Isn't that considerate? 😺💖
       .toFile(`uploads/${req.file.originalname}`);
-    res.redirect("/"); // And we're done, isn't that just the cat's meow? UwU 🐾✨💖
+    res.redirect("/"); // And poof! ain't we done a fantastic job? UwU 🐾✨💖
   } catch (err) {
     next(err);
   }
 });
 
-app.post("/submit", upload.single("kitty"), (req, res, next) => {
-  // req.file is the 'kitty' file // req.body will hold the text fields, if there were any
-  console.log(req.file);
-  res.redirect("/");
-});
 app.listen(3000, () =>
   console.log("Server is listening on port 3000, cute! UwU 🐾💖✨👉👈"),
 );
