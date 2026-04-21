@@ -1,6 +1,7 @@
 import multer from "multer";
 import express from "express";
 import fs from "fs";
+import path from "path";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import sharp from "sharp"; // Adding sharp to our toolbox, UwU to that! 💖🎉🔧
@@ -15,7 +16,11 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const date = Date.now();
+    const fileExtension = path.extname(file.originalname);
+    const filename = `${date}-${file.originalname.replace(fileExtension, "")}${fileExtension}`;
+    cb(null, filename);
+    req.file = { ...file, filename }; // Add filename to the request object
   },
 });
 
@@ -37,7 +42,7 @@ const upload = multer({
 
 app.post("/submit", upload.single("kitty"), async function (req, res, next) {
   try {
-    var newFilePath = `uploads/resized_${req.file.originalname}`;
+    var newFilePath = `uploads/resized_${req.file.filename}`;
     await sharp(req.file.path)
       .resize({
         width: 1200,
@@ -45,7 +50,7 @@ app.post("/submit", upload.single("kitty"), async function (req, res, next) {
         fit: sharp.fit.inside,
         withoutEnlargement: true,
       })
-      .toFile(newFilePath); // Meow that's better! Now let's tidy up like a good kitty UwU 🧹💖✨🐾
+      .toFile(newFilePath);
     await fs.promises.unlink(req.file.path);
     req.file.path = newFilePath;
     res.redirect("/");
