@@ -1,5 +1,6 @@
 import multer from "multer";
 import express from "express";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import sharp from "sharp"; // Adding sharp to our toolbox, UwU to that! 💖🎉🔧
@@ -32,21 +33,22 @@ const upload = multer({
       ),
     );
   },
-}).single("kitty");
+});
 
 app.post("/submit", upload.single("kitty"), async function (req, res, next) {
   try {
-    // we're making sure the long side 📏 of the pic is all nice and small, how cozy! UwU 👉👈💖
+    var newFilePath = `uploads/resized_${req.file.originalname}`;
     await sharp(req.file.path)
       .resize({
         width: 1200,
         height: 1200,
         fit: sharp.fit.inside,
         withoutEnlargement: true,
-      }) // the "fit: sharp.fit.inside" makes sure the image gets all cozy and wrapped up but not stretched out 🎀👌
-      // "withoutEnlargement: true" is like a soft little kitty pawb saying "no no 🐾" to making smaller images big. Isn't that considerate? 😺💖
-      .toFile(`uploads/${req.file.originalname}`);
-    res.redirect("/"); // And poof! ain't we done a fantastic job? UwU 🐾✨💖
+      })
+      .toFile(newFilePath); // Meow that's better! Now let's tidy up like a good kitty UwU 🧹💖✨🐾
+    await fs.promises.unlink(req.file.path);
+    req.file.path = newFilePath;
+    res.redirect("/");
   } catch (err) {
     next(err);
   }
