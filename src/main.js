@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 app.use(express.static(join(__dirname, "public")));
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -33,7 +34,7 @@ const upload = multer({
   },
 }).single("kitty");
 
-app.post("/submit", async function (req, res, next) {
+app.post("/submit", upload.single("kitty"), async function (req, res, next) {
   try {
     // we're making sure the long side 📏 of the pic is all nice and small, how cozy! UwU 👉👈💖
     await sharp(req.file.path)
