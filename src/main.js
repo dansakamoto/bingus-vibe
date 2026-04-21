@@ -13,6 +13,8 @@ const __dirname = dirname(__filename);
 const app = express();
 app.use(express.static(join(__dirname, "public")));
 
+app.use("/uploads", express.static(path.join(__dirname, "../uploads"))); // adds '/uploads' to your list of static file directories
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -82,7 +84,9 @@ app.get("/submit", (req, res) => {
 
 let catOfTheDay = "";
 
+///
 async function chooseCatOfTheDay() {
+  console.log("Choosing cat of the day! UwU 💖✨🐈");
   try {
     let files = await fsp.readdir("uploads/");
     const statsPromises = files.map(async (file) => {
@@ -91,13 +95,13 @@ async function chooseCatOfTheDay() {
       return {
         filePath,
         isFile: stat.isFile(),
-        isPlaceholder: file.startsWith("_placeholder"),
+        isPlaceholder: file.startsWith("_placeholder"), // Here we are changing how we check if it's resized 😸💖👉👈
         isResized: file.startsWith("resized_"),
       };
     });
     const stats = await Promise.all(statsPromises);
     const validFiles = stats.filter(
-      (stat) => stat.isFile && !stat.isPlaceholder && !stat.isResized,
+      (stat) => stat.isFile && !stat.isPlaceholder, // We're not excluding "resized_" images anymore! 🎉🐾
     );
     if (!validFiles.length) {
       return null; // No valid files in the directory, exit the function UwU 👉👈💖
@@ -114,10 +118,8 @@ async function chooseCatOfTheDay() {
 
 chooseCatOfTheDay();
 cron.schedule("0 0 * * *", chooseCatOfTheDay);
+
 app.get("/catoftheday", (req, res) => {
-  if (catOfTheDay) {
-    res.sendFile(path.join(__dirname, "uploads", catOfTheDay));
-  } else {
-    res.send("No Cat of the Day currently, check back in a bit UwU 👉👈💖");
-  }
+  // Render the 'catoftheday' view and pass it the 'catOfTheDay' filename
+  res.render("catoftheday", { catOfTheDay: catOfTheDay });
 });

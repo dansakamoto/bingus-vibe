@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        
+        <style>
+            body { 
+                background: #FFD1DC url('https://media.giphy.com/media/xUPOqo6E1XvWXwlCyQ/giphy.gif') repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; 
+            }
+            body { 
+                background-color: #FFD1DC; /* a soft, purrty pink color UwU 💕 */ 
+                font-family: 'Courier New', Courier, monospace; /* a simple cute font 😺 */
+                text-align: center; /* All the content will be in the center, like your lovely kitty picture! */ 
+            } h1 { 
+                color: #FF69B4; /* a bold, fun pink to add happiness UwU */ font-size: 2em; /* make our title big and pow-pow-pow! */ margin-top: 2em; /* give our title some space so it doesn't feel cluttered */ 
+            } img { 
+                max-width: 100%; /* ensure our images don't break our layout */ box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* some soft shadow for a 3D feel, 3D like the love for your kitty! */ margin-top: 2em; /* give our image some space to breathe, just like how kitties need their beauty rest 😺 */
+                max-width: 100%; max-height: 60vh; /* keep very tall images on screen */ height: auto; object-fit: contain; /* makes sure our image stays proportional within its box */ border: 10px double #FF69B4; padding: 20px; box-shadow: 0px 0px 8px rgba(255,105,180,0.8); 
+            } img { 
+                border: 10px double #FF69B4; /* a double border for double the cuteness UwU */ padding: 20px; /* to give our kitty picture some purrfect space 👼 */ box-shadow: 0px 0px 8px rgba(255,105,180,0.8); /* an even softer shadow for more depth, depth like my love for sparkles! ✨ */ 
+            } h1 { 
+                color: #FF69B4; /* keeping the text on brand with our lovely pink */ 
+                font-family: 'Comic Sans MS', sans-serif; /* a cute, curly font UwU 🎀 */ text-shadow: 0px 0px 5px #FF69B4; /* and a little shadow so it doesn't feel left out from the sparkle party */
+            } h1:before, h1:after { 
+                content:"✨"; font-size: 1.4em;
+            } 
+            .home-button { padding: 10px 20px; /* makes the button more comfy to cuddle */ background-color: #FF69B4; /* a purrty pink for Bingus */ color: white; /* for our text to pop! */ border: none; /* we want the edges to be smooth as cat fur */ box-shadow: 0px 0px 8px #FF69B4; /* some very Bingus shadow*/ cursor: pointer; /* when you hover, the tiny paw shows you can clicky! 🖱️🐾 */ }
+        </style>
+
+        <title>🐾 Cat of the Day UwU 🐾</title> 
+    </head> 
+    <body> 
+        <h1>Here's the Adowable Cat of the Day! UwU 👉👈💖</h1> <% if (catOfTheDay) { %> <img src="/<%= catOfTheDay %>" alt="Cutie Cat of the Day 😻"> <% } else { %> <p>No Cat of the Day currently, check back in a bit UwU 👉👈💖</p> <% } %>
+    <br><a href="/"> <button class="home-button">Home 🏡💕</button> </a>    
+    </body>
+        </html>
