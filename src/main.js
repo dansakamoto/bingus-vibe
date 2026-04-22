@@ -57,7 +57,7 @@ app.post("/submit", upload.single("kitty"), async function (req, res, next) {
       .toFile(newFilePath);
     await fs.promises.unlink(req.file.path);
     req.file.path = newFilePath;
-    res.redirect("/");
+    res.redirect("/thank-you");
   } catch (err) {
     next(err);
   }
@@ -117,9 +117,14 @@ async function chooseCatOfTheDay() {
 }
 
 chooseCatOfTheDay();
-cron.schedule("0 0 * * *", chooseCatOfTheDay);
+cron.schedule("0 * * * *", chooseCatOfTheDay);
 
 app.get("/catoftheday", (req, res) => {
   // Render the 'catoftheday' view and pass it the 'catOfTheDay' filename
   res.render("catoftheday", { catOfTheDay: catOfTheDay });
+});
+
+app.get("/thank-you", (req, res) => {
+  // Render the 'catoftheday' view and pass it the 'catOfTheDay' filename
+  res.render("thank-you");
 });
