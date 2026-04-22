@@ -4,10 +4,32 @@
     <meta charset="UTF-8" />
     <title><%= title %></title>
     <style>
+      @keyframes bg-animation {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position:
+            100px 50px,
+            50px 100px,
+            100px 50px;
+        }
+      }
       body {
         font-family: "Purisa", cursive;
+        background:
+          repeating-radial-gradient(circle at 0% 0%, #ffdef8, transparent 1em),
+          repeating-radial-gradient(
+            circle at 50% 50%,
+            #ffdef8,
+            #ffdef8 1em,
+            white 1em,
+            white 2em
+          );
+        background-size: 200px 200px;
         background-color: #ffdef8;
         color: #ff85a2;
+        animation: bg-animation 10s linear infinite;
       }
       h1 {
         text-align: center;
@@ -39,7 +61,7 @@
   <body>
     <h1><%= message %></h1>
     <img src="/images/bingus.png" alt="me! bingus! UwU" />
-    <a href="/submit">Submit your kitty!</a>
-    <a href="/catoftheday">View Cat of the Day! 😻</a>
+    <a href="/submit">Submit your kitty! 😻</a>
+    <a href="/catoftheday">View Cat of the Day! 😸</a>
   </body>
 </html>
