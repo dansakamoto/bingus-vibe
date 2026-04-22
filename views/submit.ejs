@@ -2,35 +2,50 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-
     <title>💖🎀 Submit an adorable kitty UwU 🎀💖</title>
-
-    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
-
     <style>
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
       body {
-        background-color: #ffc0cb;
+        background-image: url("https://media.giphy.com/media/xT0Gqz4x4eLd5gDtaU/giphy.gif"); /* Use this beautiful heart-filled background 💖 */
+        background-repeat: no-repeat;
+        background-size: cover;
         color: #000000;
-      } /* This will make the page a soft pink and text black UwU */
+        text-align: center; /* Beautiful center alignment like the submit button */
+      }
       h1 {
         text-align: center;
         padding: 20px;
         font-size: 36px;
         font-family: "Comic Sans MS", cursive, sans-serif;
-      } /* This will make the heading cute and centered with beautiful Comic Sans styling 💖 */
+        animation: bounce 1s infinite;
+      }
       form {
         margin: 0 auto;
         width: 300px;
-      } /* This will center the form on the page! UwU */
+      }
+      .home-button {
+        background-color: #ffb6c1; /* Same cute pink background as the submit button! */
+        color: #000000; /* Nice dark text color UwU */
+        text-decoration: none; /* No yucky underline */
+        padding: 15px 32px; /* Same soft padding for comfort */
+        text-align: center; /* Beautiful center alignment like the submit button */
+        border: none; /* No borders necessary, it's cuter this way! */
+        margin-top: 90px; /* Some space above the button so it's not cramped uwu */
+      }
     </style>
   </head>
-
   <body>
-    <h1>🎀💞🐾Submit an adorable kitty!🐾💞🎀</h1>
-
+    <h1>💖🎀🐈✨💃🐾Submit an adowabuw kitty!🐾💃✨🐈🎀💖</h1>
     <form action="/submit" method="post" enctype="multipart/form-data">
       <input type="file" name="kitty" required />
-
       <button
         type="submit"
         style="
@@ -43,9 +58,11 @@
           font-size: 16px;
         "
       >
-        🎀🐱Submit Kitty🐱🎀
+        💖🎀🐈✨Submit Kitty✨🐈🎀💖
       </button>
     </form>
-    <a href="/" style="color: #000000">💕🏡Back to home🏡💕</a>
+    <br />
+    <br />
+    <a href="/" class="home-button">💖🎀🏡✨Back to home✨🏡🎀💖</a>
   </body>
 </html>
