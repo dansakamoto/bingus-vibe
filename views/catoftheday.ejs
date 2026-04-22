@@ -24,14 +24,16 @@
                 font-family: 'Comic Sans MS', sans-serif; /* a cute, curly font UwU 🎀 */ text-shadow: 0px 0px 5px #FF69B4; /* and a little shadow so it doesn't feel left out from the sparkle party */
             } h1:before, h1:after { 
                 content:"✨"; font-size: 1.4em;
-            } 
-            .home-button { padding: 10px 20px; /* makes the button more comfy to cuddle */ background-color: #FF69B4; /* a purrty pink for Bingus */ color: white; /* for our text to pop! */ border: none; /* we want the edges to be smooth as cat fur */ box-shadow: 0px 0px 8px #FF69B4; /* some very Bingus shadow*/ cursor: pointer; /* when you hover, the tiny paw shows you can clicky! 🖱️🐾 */ }
+            } p.quote { 
+                font-size: 2em; /* a bigger font size for legibility 😸✨👉👈 */ color: #FF69B4; /* our lovely pink color resonating Bingus's charm */ font-family: 'Comic Sans MS', sans-serif; /* a cute, curly font UwU 🎀 */ text-shadow: 0px 0px 5px #FF69B4; /* and a little shadow so it casts a bit of Bingus's magic everywhere it goes */ 
+            } .home-button { padding: 10px 20px; /* makes the button more comfy to cuddle */ background-color: #FF69B4; /* a purrty pink for Bingus */ color: white; /* for our text to pop! */ border: none; /* we want the edges to be smooth as cat fur */ box-shadow: 0px 0px 8px #FF69B4; /* some very Bingus shadow*/ cursor: pointer; /* when you hover, the tiny paw shows you can clicky! 🖱️🐾 */ }
         </style>
 
         <title>🐾 Cat of the Day UwU 🐾</title> 
     </head> 
     <body> 
         <h1>Here's the Adowable Cat of the Day! UwU 👉👈💖</h1> <% if (catOfTheDay) { %> <img src="/<%= catOfTheDay %>" alt="Cutie Cat of the Day 😻"> <% } else { %> <p>No Cat of the Day currently, check back in a bit UwU 👉👈💖</p> <% } %>
+    <br><p class="quote"><%= randomQuote %></p>
     <br><a href="/"> <button class="home-button">Home 🏡💕</button> </a>    
     </body>
         </html>

@@ -119,9 +119,23 @@ async function chooseCatOfTheDay() {
 chooseCatOfTheDay();
 cron.schedule("0 * * * *", chooseCatOfTheDay);
 
+let quotes = [
+  "Today is a puur-fect day to be paw-sitive! UwU 🐾✨",
+  "Always remembewr to be the purr-son your cat thinks you are! 🐈💖",
+  "Keep your tail high, keep your head higher, and always show them your claws. Rawr! 😸✨",
+  "Fur every dark night, a bright day of snuggles follows. UwU 🌞💕",
+  "The smallest feline is a meow-sterpiece! 😺💖✨",
+  "Cuddle up & snuggle on, a new day is paw-sible with a cat by your side! UwU 🐱💖",
+];
+
 app.get("/catoftheday", (req, res) => {
+  // Heere we're picking a quote at wandom every time this route is accessed. 😻✨👉👈
+  let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   // Render the 'catoftheday' view and pass it the 'catOfTheDay' filename
-  res.render("catoftheday", { catOfTheDay: catOfTheDay });
+  res.render("catoftheday", {
+    catOfTheDay: catOfTheDay,
+    randomQuote: randomQuote,
+  });
 });
 
 app.get("/thank-you", (req, res) => {
