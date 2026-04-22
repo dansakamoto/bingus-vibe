@@ -117,8 +117,9 @@ async function chooseCatOfTheDay() {
 }
 
 chooseCatOfTheDay();
-//cron.schedule("0 * * * *", chooseCatOfTheDay);
-cron.schedule("* * * * *", chooseCatOfTheDay);
+//cron.schedule("0 0 * * *", chooseCatOfTheDay); // once per day
+//cron.schedule("0 * * * *", chooseCatOfTheDay); // once per hour
+cron.schedule("* * * * *", chooseCatOfTheDay); // once per minute
 
 let quotes = [
   "Today is a puur-fect day to be paw-sitive! UwU 🐾✨",
